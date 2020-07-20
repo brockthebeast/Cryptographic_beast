@@ -1,0 +1,68 @@
+<html>
+<style type="text/css">
+    body{
+        background-color: #5baaaa;
+    }
+</style>
+<div align="center">
+<head>
+<h2 style="font: Times New Roman; font-size: 30px; box-shadow: aqua; font-style: oblique; color: #4a346e; border-bottom: solid;" >Encrypted-Decrypted</h2>
+</head>
+<body>
+<textarea id="plain" placeholder="Write any number to be encrypted and decrypted" style="margin: 20px; box-shadow: darkblue; border-radius: 10px; height: 250px; font: Times New Roman; background-color: #fdfdfd; font-style: oblique; border-width: 2px; border: solid;" row="1000" cols="100"></textarea>
+<br/>
+<button type="button" style="font: Times New Roman; font-size: 15px; border-radius: 5px; background-color: #fdfdfd; font-style: oblique; display: inline-block;border-width: 1px; border: solid; margin: 2px; padding: 5px; " onclick="plaintoencrypted()">Encrypt and Decrypt</button>
+<br/>
+<textarea id="encrypted" placeholder="Encrypted message" style="margin: 20px;box-shadow:darkblue; height: 250px; border-radius: 10px; font: Times New Roman; background-color: #fdfdfd;font-style: oblique;border-width: 2px; border: solid;" row="1000" cols="100"></textarea>
+<textarea id="extra" placeholder="Decrypted message" style="margin: 20px;box-shadow:darkblue; height: 250px; border-radius: 10px; font: Times New Roman; background-color: #fdfdfd;font-style: oblique;border-width: 2px; border: solid;" row="1000" cols="100"></textarea>
+
+</div>
+<script type="text/javascript">
+    //function to convert plain text to encrypted text!!
+    //function to convert plain text to encrypted text!!
+    function gcd(a , b) {
+    var t;
+    while(1) {
+      t= a%b;
+      if(t==0)
+      return b;
+      a = b;
+      b= t;
+   }
+}
+    var decrypted_char;
+
+    function RSA_encryption(x){
+      var randomprime1 = 7919;
+      var randomprime2 = 7907;
+
+      var n = (randomprime1*randomprime2);
+      var public_key = 2;
+      var phi = (randomprime2 - 1)*(randomprime1 - 1);
+
+      while(public_key < phi){
+        if(gcd(public_key , phi) == 1)break;
+        else public_key++;
+      }
+      var private_key = (1/public_key);
+      var msg = x; 
+      var encrypted_char = (msg**public_key);
+      decrypted_char = (encrypted_char**private_key);
+      decrypted_char = (decrypted_char%n);
+      encrypted_char = (encrypted_char%n);
+      return encrypted_char;
+    }
+	function plaintoencrypted(){
+    var input = document.getElementById("plain").value;
+    if(input=="")
+        alert("Text not available for Encryption!!");
+    var txt = RSA_encryption(input);
+    document.getElementById("encrypted").value=txt;
+    var z = Math.ceil(decrypted_char);
+    document.getElementById("extra").value=z;
+}
+    //function to convert encrypted text to plain text!!
+    
+</script>
+</body>
+</html>
